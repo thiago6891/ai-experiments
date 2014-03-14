@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>AI Experiments - Search</title>
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="scripts/search.js" ></script>
+	</head>
+	<body>
+		<input type="number" id="columnsQty" min="1" max="500" value="1">
+		<input type="number" id="rowsQty" min="1" max="500" value="1">
+		<input type="button" id="generateBtn" value="Generate Grid">
+		<div id="nextAction"></div>
+		<input type="button" id="dfsBtn" value="DFS" disabled>
+		<input type="button" id="bfsBtn" value="BFS" disabled>
+		<input type="button" id="asBtn" value="A*" disabled>
+		<canvas id="grid" width="500" height="500">Your browser doesn't support canvas.</canvas>
+	</body>
+</html>
