@@ -32,18 +32,17 @@
             return false;
         };
 
-        // this function returns the index of the node in the frontier which has the smallest sum
-        // of the path cost and the estimated distance to the goal.
-        this.getSmallestEstimatedIndex = function () {
-            var smallestEstimatedCost = Infinity;
+        // this function returns the index of the node in the frontier that's nearest to the goal
+        this.getNearestToGoalIndex = function () {
+            var smallestDistance = Infinity;
             var index = -1;
             var goal = this.problem.goal;
 
             for (var i = 0; i < this.frontier.length; i++) {
-                var node = this.frontier[i];
-                var estimatedDistance = Math.floor(this.distanceBetween(node.state, goal));
-                if (node.pathCost + estimatedDistance < smallestEstimatedCost) {
-                    smallestEstimatedCost = node.pathCost + estimatedDistance;
+                var state = this.frontier[i].state;
+                var distance = this.distanceBetween(state, goal);
+                if (distance < smallestDistance) {
+                    smallestDistance = distance;
                     index = i;
                 }
             }
@@ -108,7 +107,7 @@
 
         // this is the function to expand the next node using A* search
         this.expandNextNodeAS = function () {
-            var index = this.getSmallestEstimatedIndex();
+            var index = this.getNearestToGoalIndex();
             var node = this.frontier[index];
             this.frontier.splice(index, 1);
 
