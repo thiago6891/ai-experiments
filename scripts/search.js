@@ -61,6 +61,18 @@ var Grid = function(rows, cols) {
 		this._highlight(this._cells[x][y]);
 	};
 	
+	this.highlightExplored = function (x, y) {
+	    this._ctx.fillStyle = "#0000FF";
+	    this._highlight(this._cells[x][y]);
+	    this._ctx.fillStyle = "#000000";
+	};
+
+	this.highlightFrontier = function (x, y) {
+	    this._ctx.fillStyle = "#00FF00";
+	    this._highlight(this._cells[x][y]);
+	    this._ctx.fillStyle = "#000000";
+	};
+
 	this._highlight = function(cell) {
 		this._ctx.fillRect(cell.x, cell.y, this._wCell, this._hCell);
 	};
@@ -121,10 +133,10 @@ var Problem = function(init, goal, grid) {
 		if (s.y > 0) {
 			r.push(UP);
 		}
-		if (s.x < this._grid.cols - 1) {
+		if (s.x < this._grid._cols - 1) {
 			r.push(RIGHT);
 		}
-		if (s.y < this._grid.rows - 1) {
+		if (s.y < this._grid._rows - 1) {
 			r.push(DOWN);
 		}
 		if (s.x > 0) {
@@ -135,16 +147,16 @@ var Problem = function(init, goal, grid) {
 	};
 	
 	this.result = function(s, a) {
-		var r = [];
+		var r = null;
 		
 		if (a == UP) {
-			r.push(new State(s.x, s.y - 1));
+			r = new State(s.x, s.y - 1);
 		} else if (a == RIGHT) {
-			r.push(new State(s.x + 1, s.y));
+			r = new State(s.x + 1, s.y);
 		} else if (a == DOWN) {
-			r.push(new State(s.x, s.y + 1));
+			r = new State(s.x, s.y + 1);
 		} else if (a == LEFT) {
-			r.push(new State(s.x - 1, s.y));
+			r = new State(s.x - 1, s.y);
 		}
 		
 		return r;
@@ -174,13 +186,69 @@ var Agent = function(problem) {
 	
 	this._explored = [];
 	
-	this.solve = function() {
-		setInterval(this.search, 33);
+	this._seq = [];
+	this._solution = function (node) {
+	    this._seq = [];
+	    while (!node.state.equals(this._problem.initialState())) {
+	        this._seq.push(node.state);
+	        node = node.parent;
+	    }
+	    this._seq.push(node.state);
+	};
+	
+	this._inExplored = function (state) {
+	    for (var i = 0; i < this._explored.length; i++) {
+	        if (this._explored[i].equals(state)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	};
+
+	this._inFrontier = function (state) {
+	    for (var i = 0; i < this._frontier.length; i++) {
+	        if (this._frontier[i].state.equals(state)) {
+	            return true;
+	        }
+	    }
+	    return false;
 	};
 };
 
-var breadthFirstSearch = function() {
-	console.log(this._searching);
+var loop;
+var solveBFS = function (agent) {
+    loop = setInterval(function () { breadthFirstSearch(agent); }, 33);
+};
+
+var breadthFirstSearch = function (agent) {
+    if (agent._searching) {
+        var node = agent._frontier.pop();
+        agent._explored.push(node.state);
+        agent._problem._grid.highlightExplored(node.state.x, node.state.y);
+        var actions = agent._problem.actions(node.state);
+        for (var i = 0; i < actions.length; i++) {
+            var child = new Node(agent._problem, actions[i], node);
+            if (!agent._inExplored(child.state) && !agent._inFrontier(child.state)) {
+                if (agent._problem.goalTest(child.state)) {
+                    agent._solution(child);
+                    agent._searching = false;
+                    agent._executing = true;
+                    return;
+                }
+                agent._frontier.push(child);
+                agent._problem._grid.highlightFrontier(child.state.x, child.state.y);
+            }
+        }
+    } else if (agent._executing) {
+        if (agent._seq.length != 0) {
+            var s = agent._seq.pop();
+            agent._problem._grid._highlight(agent._problem._grid._cells[s.x][s.y]);
+        } else {
+            agent._executing = false;
+        }
+    } else {
+        clearInterval(loop);
+    }
 };
 
 var grid;
@@ -243,8 +311,7 @@ var startDFS = function() {
 var startBFS = function() {
 	var problem = new Problem(init, goal, grid);
 	var agent = new Agent(problem);
-	agent.search = breadthFirstSearch;
-	agent.solve();
+	solveBFS(agent);
 };
 
 var startAS = function() {
