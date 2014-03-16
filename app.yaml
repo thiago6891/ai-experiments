@@ -11,7 +11,7 @@ handlers:
 
 - url: /search\.html
   static_files: pages/search.html
-  upload: search\.html
+  upload: pages/search\.html
 
 - url: /css
   static_dir: css
