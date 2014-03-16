@@ -1,5 +1,5 @@
 ﻿requirejs.config({
-    baseUrl: "scripts",
+    baseUrl: "../scripts",
     paths: {
         jquery: "libs/jquery-2.1.0.min"
     }
@@ -10,9 +10,8 @@ require(["jquery", "state", "problem", "action", "grid", "agent"],
         var generateGrid = function () {
             init = null;
             goal = null;
-            var cols = Number($("#columnsQty").val());
-            var rows = Number($("#rowsQty").val());
-            grid.regenerate(rows, cols);
+            var size = Number($("#size").val());
+            grid.regenerate(size, size);
             disableSearchButtons();
         };
 
