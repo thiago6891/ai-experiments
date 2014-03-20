@@ -5,7 +5,8 @@
     }
 });
 
-require(["jquery", "state", "problem", "action", "grid", "agent"],
+require(
+    ["jquery", "search/state", "search/problem", "search/action", "search/grid", "search/agent"],
     function ($, State, Problem, Action, Grid, Agent) {
         var generateGrid = function () {
             init = null;

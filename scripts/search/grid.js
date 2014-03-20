@@ -1,4 +1,4 @@
-﻿define(["jquery", "state", "cell"], function ($, State, Cell) {
+﻿define(["jquery", "search/state", "search/cell"], function ($, State, Cell) {
     return function (rows, cols) {
         // this function is called when the grid is generated
         this.onGridGenerated = function () { };

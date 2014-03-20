@@ -1,4 +1,4 @@
-﻿define(["child-node"], function (ChildNode) {
+﻿define(["search/child-node"], function (ChildNode) {
     return function (problem) {
 
         // this function gets a node and add to the this.seq the sequence

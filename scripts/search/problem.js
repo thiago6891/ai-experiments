@@ -1,4 +1,4 @@
-﻿define(["state", "action"], function (State, Action) {
+﻿define(["search/state", "search/action"], function (State, Action) {
     return function (init, goal, grid) {
         this.actions = function (s) {
             r = [];
