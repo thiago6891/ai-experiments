@@ -109,12 +109,14 @@ define(["slide-puzzle/square", "slide-puzzle/direction"], function (Square, Dire
 	        nums.push(i);
 	    }
 
-	    for (var n = 0; n < max_n; n++) {
-	        var rnd_idx = Math.floor(Math.random() * nums.length);
-	        var x = n % this.sqrs.length;
-	        var y = Math.floor(n / this.sqrs.length);
-	        this.sqrs[x][y].number = nums[rnd_idx];
-	        nums.splice(rnd_idx, 1);
+	    for (var i = 0; i < this.sqrs.length; i++) {
+	        for (var j = 0; j < this.sqrs[i].length; j++) {
+	            if (this.sqrs[i][j].number != "") {
+	                var rnd_idx = Math.floor(Math.random() * nums.length);
+	                this.sqrs[i][j].number = nums[rnd_idx];
+	                nums.splice(rnd_idx, 1);
+	            }
+	        }
 	    }
 	};
 
