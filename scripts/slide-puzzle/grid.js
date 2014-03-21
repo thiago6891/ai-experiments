@@ -18,8 +18,8 @@ define(function () {
 		}
 		
 		// the last square isn't drawable
-		this.sqrs[cols - 1][cols - 1].x_pos = 0;
-		this.sqrs[cols - 1][cols - 1].y_pos = 0;
+		this.sqrs[cols - 1][cols - 1].pos.x = 0;
+		this.sqrs[cols - 1][cols - 1].pos.y = 0;
 		this.sqrs[cols - 1][cols - 1].size = 0;
 		this.sqrs[cols - 1][cols - 1].font = 0;
 		this.sqrs[cols - 1][cols - 1].number = "";
