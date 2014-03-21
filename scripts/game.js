@@ -19,6 +19,7 @@ define(function () {
 		
 		this.objs = [];
 		this.ctx = canvas.getContext("2d");
-		this.loop = setInterval(this.game_loop, 17);
+		
+		setInterval(this.game_loop.bind(this), 17);
 	};
 });
