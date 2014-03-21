@@ -5,25 +5,26 @@ requirejs.config({
     }
 });
 
-require(["jquery", "game", "slide-puzzle/agent", "slide-puzzle/problem", "slide-puzzle/grid"], 
-	function ($, Game, Agent, Problem, Grid) {
+require(
+    ["jquery", "game", "slide-puzzle/grid"],
+	function ($, Game, Grid) {
 		$(document).ready(function () {
 			var canvas = ($("#canvas")[0]);
 			var game = new Game(canvas);
 			var grid;
-			var agent;
-			var agent_loop;
+			//var agent;
+			//var agent_loop;
 			
-			var agent_play = function () {
-				if (grid.clickable) {
-					var action = agent.next_action();
-					if (action != null) {
-						grid.click_sqr(action.x, action.y);
-					} else {
-						clearInterval(agent_loop);
-					}
-				}
-			};
+			//var agent_play = function () {
+			//	if (grid.clickable()) {
+			//		var action = agent.next_action();
+			//		if (action != null) {
+			//			grid.click_sqr(action.x, action.y);
+			//		} else {
+			//			clearInterval(agent_loop);
+			//		}
+			//	}
+			//};
 			
 			$("#generateBtn").click(function () {
 				game.objs = [];
@@ -51,12 +52,12 @@ require(["jquery", "game", "slide-puzzle/agent", "slide-puzzle/problem", "slide-
 				}
 			});
 			
-			$("#solveBtn").click(function () {
-				var problem = new Problem();
-				agent = new Agent(problem);
-				agent.find_solution();
-				agent_loop = setInterval(agent_play, 17);
-			});
+			//$("#solveBtn").click(function () {
+			//	var problem = new Problem();
+			//	agent = new Agent(problem);
+			//	agent.find_solution();
+			//	agent_loop = setInterval(agent_play, 17);
+			//});
 		});
 	}
 );
