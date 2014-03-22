@@ -6,25 +6,25 @@ requirejs.config({
 });
 
 require(
-    ["jquery", "game", "slide-puzzle/grid"],
-	function ($, Game, Grid) {
+    ["jquery", "game", "slide-puzzle/grid", "slide-puzzle/state", "slide-puzzle/problem", "slide-puzzle/agent"],
+	function ($, Game, Grid, State, Problem, Agent) {
 		$(document).ready(function () {
 			var canvas = ($("#canvas")[0]);
 			var game = new Game(canvas);
 			var grid;
-			//var agent;
-			//var agent_loop;
+			var agent;
+			var agent_loop;
 			
-			//var agent_play = function () {
-			//	if (grid.clickable()) {
-			//		var action = agent.next_action();
-			//		if (action != null) {
-			//			grid.click_sqr(action.x, action.y);
-			//		} else {
-			//			clearInterval(agent_loop);
-			//		}
-			//	}
-			//};
+			var agent_play = function () {
+				if (grid.clickable()) {
+					var action = agent.next_action();
+					if (action != null) {
+						grid.click_sqr(action.x, action.y);
+					} else {
+						clearInterval(agent_loop);
+					}
+				}
+			};
 			
 			$("#generateBtn").click(function () {
 				game.objs = [];
@@ -52,12 +52,20 @@ require(
 				}
 			});
 			
-			//$("#solveBtn").click(function () {
-			//	var problem = new Problem();
-			//	agent = new Agent(problem);
-			//	agent.find_solution();
-			//	agent_loop = setInterval(agent_play, 17);
-			//});
+			$("#solveBtn").click(function () {
+			    var state = new State(grid.sqrs.length);
+
+			    for (var i = 0; i < state.sqrs.length; i++) {
+			        for (var j = 0; j < state.sqrs[i].length; j++) {
+			            state.sqrs[i][j] = grid.sqrs[i][j].number;
+			        }
+			    }
+
+				var problem = new Problem(state);
+				agent = new Agent(problem);
+				agent.search();
+				agent_loop = setInterval(agent_play, 17);
+			});
 		});
 	}
 );
