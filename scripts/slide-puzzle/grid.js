@@ -104,18 +104,45 @@ define(["slide-puzzle/square", "slide-puzzle/direction"], function (Square, Dire
 
 	Grid.prototype.shuffle = function () {
 	    var max_n = this.sqrs.length * this.sqrs.length - 1;
-	    var nums = [];
-	    for (var i = 1; i <= max_n; i++) {
-	        nums.push(i);
-	    }
+	    var solvable = false;
+	    while (!solvable) {
+	        var nums = [];
+	        for (var i = 1; i <= max_n; i++) {
+	            nums.push(i);
+	        }
 
-	    for (var i = 0; i < this.sqrs.length; i++) {
-	        for (var j = 0; j < this.sqrs[i].length; j++) {
-	            if (this.sqrs[i][j].number != "") {
-	                var rnd_idx = Math.floor(Math.random() * nums.length);
-	                this.sqrs[i][j].number = nums[rnd_idx];
-	                nums.splice(rnd_idx, 1);
+	        var blank_distance_from_bottom = 0;
+	        for (var i = 0; i < this.sqrs.length; i++) {
+	            for (var j = 0; j < this.sqrs[i].length; j++) {
+	                if (this.sqrs[i][j].number != "") {
+	                    var rnd_idx = Math.floor(Math.random() * nums.length);
+	                    this.sqrs[i][j].number = nums[rnd_idx];
+	                    nums.splice(rnd_idx, 1);
+	                } else {
+	                    if (this.sqrs.length % 2 == 0) {
+	                        blank_distance_from_bottom = this.sqrs.length - j - i;
+	                    }
+	                }
 	            }
+	        }
+
+	        var inversions = 0;
+	        for (var i = 0; i < this.sqrs.length; i++) {
+	            for (var j = 0; j < this.sqrs[i].length; j++) {
+	                var num = this.sqrs[i][j].number;
+	                if (num != "") {
+	                    for (var k = j * this.sqrs.length + i + 1; k < this.sqrs.length * this.sqrs.length - 1; k++) {
+	                        if (this.sqrs[k % this.sqrs.length][Math.floor(k / this.sqrs.length)].number != "" &&
+                                this.sqrs[k % this.sqrs.length][Math.floor(k / this.sqrs.length)].number < num) {
+	                            inversions++;
+	                        }
+	                    }
+	                }
+	            }
+	        }
+
+	        if ((inversions + blank_distance_from_bottom) % 2 == 0) {
+	            solvable = true;
 	        }
 	    }
 	};
