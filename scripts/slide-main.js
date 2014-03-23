@@ -15,6 +15,16 @@ require(
 			var agent;
 			var agent_loop;
 			
+			var generate = function (side) {
+			    game.objs = [];
+			    grid = new Grid(side, game.canvas.width);
+			    game.objs.push(grid);
+
+			    grid.shuffle();
+
+			    $("#solveBtn").attr("disabled", false);
+			};
+
 			var agent_play = function () {
 				if (grid.clickable()) {
 					var action = agent.next_action();
@@ -26,21 +36,12 @@ require(
 				}
 			};
 			
-			$("#generateBtn").click(function () {
-				game.objs = [];
-				var cols = Number($("#size").val());
-				grid = new Grid(cols, game.canvas.width);
-				game.objs.push(grid);
-				
-				$("#shuffleBtn").attr("disabled", false);
-				$("#solveBtn").attr("disabled", true);
+			$("#generate8Btn").click(function () {
+			    generate(3);
 			});
 			
-			$("#shuffleBtn").click(function () {
-				if (grid != undefined) {
-					grid.shuffle();
-					$("#solveBtn").attr("disabled", false);
-				}
+			$("#generate15Btn").click(function () {
+			    generate(4);
 			});
 			
 			$("#canvas").click(function (e) {
