@@ -14,7 +14,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import jinja2
+import os
 import webapp2
+
+template_dir = os.path.dirname(__file__)
+jinja_env = jinja2.Environment(
+    loader = jinja2.FileSystemLoader(template_dir),
+    autoescape = True)
+
+class BaseHandler(webapp2.RequestHandler):
+    
+    def write(self, *a, **kw):
+        self.response.out.write(*a, **kw)
+        
+    def render_str(self, file_name, **params):
+        template = jinja_env.get_template(file_name)
+        return template.render(params)
+        
+    def render(self, file_name, **kw):
+        self.write(self.render_str(file_name, **kw))
+        
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
