@@ -36,9 +36,11 @@ class BaseHandler(webapp2.RequestHandler):
         self.write(self.render_str(file_name, **kw))
         
 
-class MainHandler(webapp2.RequestHandler):
+class MainHandler(BaseHandler):
+    
     def get(self):
-        self.response.write('Hello world!')
+        self.render_str("main.html")
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
