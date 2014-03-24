@@ -18,7 +18,7 @@ import jinja2
 import os
 import webapp2
 
-template_dir = os.path.dirname(__file__)
+template_dir = os.path.join(os.path.dirname(__file__), "templates");
 jinja_env = jinja2.Environment(
     loader = jinja2.FileSystemLoader(template_dir),
     autoescape = True)
@@ -39,7 +39,7 @@ class BaseHandler(webapp2.RequestHandler):
 class MainHandler(BaseHandler):
     
     def get(self):
-        self.render_str("main.html")
+        self.render("main.html")
 
 
 app = webapp2.WSGIApplication([
