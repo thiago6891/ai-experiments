@@ -41,15 +41,7 @@ class MainHandler(BaseHandler):
     def get(self):
         self.render("main.html", title = "AI Experiments")
         
-        
-class SearchHandler(BaseHandler):
-    
-    def get(self):
-        self.render("search.html", title = "AI Experiments - Search")
 
-
-html_re = r'(.html)?'
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ('/search' + html_re, SearchHandler)
+    ('/', MainHandler)
 ], debug=True)
