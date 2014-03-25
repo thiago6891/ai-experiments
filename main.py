@@ -37,11 +37,21 @@ class BaseHandler(webapp2.RequestHandler):
         
 
 class MainHandler(BaseHandler):
-    
     def get(self):
         self.render("main.html", title = "AI Experiments")
-        
 
+class SearchHandler(BaseHandler):
+    def get(self):
+        self.render("search.html", title = "AI Experiments - Search")
+
+class SlidePuzzleHandler(BaseHandler):
+    def get(self):
+        self.render("slide-puzzle.html", title = "AI Experiments - Slide Puzzle")
+
+
+html_re = r'(.html)?'
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/search' + html_re, SearchHandler),
+    ('/slide-puzzle', SlidePuzzleHandler)
 ], debug=True)
