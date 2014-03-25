@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<script data-main="../scripts/slide-main" src="../scripts/require.js"></script>
+{% endblock %}
+{% block content %}
+<input type="button" id="generate8Btn" value="Generate 8-puzzle">
+<input type="button" id="generate15Btn" value="Generate 15-puzzle">
+<input type="button" id="solveBtn" value="Solve" disabled>
+<canvas id="canvas" width="500" height="500">Your browser doesn't support canvas.</canvas>
+{% endblock %}
