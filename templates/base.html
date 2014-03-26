@@ -1,15 +1,31 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>{{ title }}</title>
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
 		{% block head %}{% endblock %}
 	</head>
 	<body>
-		<div id="content">
-			{% block content %}{% endblock %}
-		</div>
-		<div id="side-menu">
+        <div class="main-header">
+            <div class="main-header-text">
+                AI Experiments
+            </div>
+        </div>
+		<div style="margin-left:auto;margin-right:auto;">
+            <div class="side-menu">
+                <ul>
+                    <li>
+                        <a href="search">Search</a>
+                    </li>
+                    <li>
+                        <a href="slide-puzzle">Slide Puzzle</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="page-content">
+                {% block content %}{% endblock %}
+            </div>
 		</div>
 	</body>
 </html>

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block content %}
+{% block head %}
 <link rel="stylesheet" type="text/css" href="../css/search.css" />
 <script data-main="../scripts/search-main" src="../scripts/require.js"></script>
 {% endblock %}
@@ -10,22 +10,12 @@
     select the initial and goal states for the search and then run the desired algorithm.
 </p>
 <p>
-    The idea for this page came after watching an explanation from Peter Norvig at
-    <a href="https://www.udacity.com/course/cs271">Udacity's Introduction to AI class</a>,
-    and I found it very helpful to visualize what actually happens.
-</p>
-<p>
-    This page was written in HTML5 and I've only tested it in chrome and I have no
-    intention of making it cross-browser compatible.
-</p>
-<p>
-    The code for this page can de found at 
-    <a href="https://github.com/thiago6891/ai-experiments">github</a>.
+    The grid's size should be a number between 2 and 500.
 </p>
 <div class="search">
     <div class="input">
         <label class="label">Size</label>
-        <input class="inputBox" type="number" id="size" min="1" max="500" value="50">
+        <input class="inputBox" type="number" id="size" min="2" max="500" value="50">
     </div>
     <input type="button" id="generateBtn" value="Generate Grid">
     <div id="nextAction"></div>
