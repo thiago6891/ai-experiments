@@ -9,8 +9,8 @@ require(
     ["jquery", "game", "slide-puzzle/grid", "slide-puzzle/state", "slide-puzzle/problem", "slide-puzzle/agent"],
 	function ($, Game, Grid, State, Problem, Agent) {
 		$(document).ready(function () {
-			var canvas = ($("#canvas")[0]);
-			var game = new Game(canvas);
+			var game = new Game(($("#canvas")[0]));
+			
 			var grid;
 			var agent;
 			var agent_loop;
@@ -25,6 +25,7 @@ require(
 			    $("#solveBtn").attr("disabled", false);
 			};
 
+			// this function controls the agent's clicks on the grid.
 			var agent_play = function () {
 				if (grid.clickable()) {
 					var action = agent.next_action();
@@ -56,6 +57,7 @@ require(
 			$("#solveBtn").click(function () {
 			    var state = new State(grid.sqrs.length);
 
+				// set the initial state
 			    for (var i = 0; i < state.sqrs.length; i++) {
 			        for (var j = 0; j < state.sqrs[i].length; j++) {
 			            state.sqrs[i][j] = grid.sqrs[i][j].number;
