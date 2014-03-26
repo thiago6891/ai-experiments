@@ -49,9 +49,11 @@ class SlidePuzzleHandler(BaseHandler):
         self.render("slide-puzzle.html", title = "AI Experiments - Slide Puzzle")
 
 
-html_re = r'(.html)?'
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/search' + html_re, SearchHandler),
+    ('/search', SearchHandler),
+    # search.html should be kept since the page was initially served statically
+    # maybe in the future it can be removed. (March, 25, 2014)
+    ('/search.html', SearchHandler),
     ('/slide-puzzle', SlidePuzzleHandler)
 ], debug=True)
