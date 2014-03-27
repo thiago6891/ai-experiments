@@ -11,7 +11,10 @@ require(
         var generateGrid = function () {
             init = null;
             goal = null;
+
             var size = Number($("#size").val());
+            if (size < 2 || 500 < size) return;
+
             grid.regenerate(size, size);
             disableSearchButtons();
         };
