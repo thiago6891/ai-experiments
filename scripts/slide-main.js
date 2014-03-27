@@ -32,10 +32,23 @@ require(
 						grid.click_sqr(action.x, action.y);
 					} else {
 						clearInterval(agent_loop);
+						enable_btns();
 					}
 				}
 			};
 			
+			var disable_btns = function () {
+				$("#solveBtn").attr("disabled", true);
+				$("#generate8Btn").attr("disabled", true);
+				$("#generate15Btn").attr("disabled", true);
+			};
+
+			var enable_btns = function () {
+				$("#solveBtn").attr("disabled", false);
+				$("#generate8Btn").attr("disabled", false);
+				$("#generate15Btn").attr("disabled", false);
+			};
+
 			$("#generate8Btn").click(function () {
 			    generate(3);
 			});
@@ -54,6 +67,8 @@ require(
 			});
 			
 			$("#solveBtn").click(function () {
+				disable_btns();
+
 			    var state = new State(grid.sqrs.length);
 
 			    for (var i = 0; i < state.sqrs.length; i++) {
