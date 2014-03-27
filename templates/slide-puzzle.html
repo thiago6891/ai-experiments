@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% block head %}
+<link href="../css/slide-puzzle.css" rel="stylesheet" type="text/css" />
 <script data-main="../scripts/slide-main" src="../scripts/require.js"></script>
 {% endblock %}
 {% block content %}
 <p>
     Below you'll find the classic Sliding Puzzle (more information 
     <a href="http://en.wikipedia.org/wiki/Sliding_puzzle" target="_blank">here</a> if you never
-    heard about it. You're able to generate either an 8-puzzle or a 15-puzzle and play it yourself,
+    heard about it). You're able to generate either an 8-puzzle or a 15-puzzle and play it yourself,
     or have an agent solve it.
 </p>
 <p>
@@ -14,8 +15,10 @@
     solution to the 15-puzzle. It may seem like the page froze but trust me, the agent is still 
     searching.
 </p>
-<input type="button" id="generate8Btn" value="Generate 8-puzzle">
-<input type="button" id="generate15Btn" value="Generate 15-puzzle">
-<input type="button" id="solveBtn" value="Solve" disabled>
-<canvas id="canvas" width="500" height="500">Your browser doesn't support canvas.</canvas>
+<div class="puzzle-area">
+    <input class="first-btn" type="button" id="generate8Btn" value="Generate 8-puzzle">
+    <input class="second-btn" type="button" id="generate15Btn" value="Generate 15-puzzle">
+    <input class="third-btn" type="button" id="solveBtn" value="Solve" disabled>
+    <canvas class="canvas" id="canvas" width="500" height="500">Your browser doesn't support canvas.</canvas>
+</div>
 {% endblock %}

@@ -12,20 +12,18 @@
                 AI Experiments
             </div>
         </div>
-		<div style="margin-left:auto;margin-right:auto;">
-            <div class="side-menu">
-                <ul>
-                    <li>
-                        <a href="search">Search</a>
-                    </li>
-                    <li>
-                        <a href="slide-puzzle">Slide Puzzle</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="page-content">
-                {% block content %}{% endblock %}
-            </div>
-		</div>
+        <div class="side-menu">
+            <ul>
+                <li>
+                    <a href="search">Search Visualization</a>
+                </li>
+                <li>
+                    <a href="slide-puzzle">Sliding Puzzle</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            {% block content %}{% endblock %}
+        </div>
 	</body>
 </html>
