@@ -1,3 +1,10 @@
+/*
+ * This is just a very simple implementation of a priority queue done by extending the Array class.
+ * The push method has been modified to receive as parameters the element to be inserted and its
+ * priority. Only the push() and pop() methods should be used to guarantee the queue will work
+ * correctly.
+ */
+
 var PriorityQueue = function() {
     Array.call(this);
 };
