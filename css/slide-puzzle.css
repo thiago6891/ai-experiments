@@ -31,5 +31,11 @@
 .total-moves {
     float:left;
     position:absolute;
+    top:120px;
+}
+
+.total-time {
+    float:left;
+    position:absolute;
     top:90px;
 }

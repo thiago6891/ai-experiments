@@ -18,6 +18,9 @@ require(
 			var moves_counter = 0;
 			var TOTAL_MOVES_TEXT = "Total Moves: ";
 
+			var TOTAL_TIME_TEXT = "Search Time: ";
+			var TOTAL_TIME_UNIT = "ms";
+
 			var update_moves_div = function () {
 				$("#totalMoves").text(TOTAL_MOVES_TEXT + String(moves_counter));
 			};
@@ -32,8 +35,17 @@ require(
 				update_moves_div();
 			};
 
+			var show_total_time = function (time) {
+				var time_text = "";
+				if (time != false) {
+					time_text = TOTAL_TIME_TEXT + String(time) + TOTAL_TIME_UNIT;
+				}
+				$("#totalTime").text(time_text);
+			};
+
 			var generate = function (side) {
 				reset_moves_counter();
+				show_total_time(false);
 
 			    game.objs = [];
 			    grid = new Grid(side, game.canvas.width);
@@ -102,7 +114,14 @@ require(
 
 				var problem = new Problem(state);
 				agent = new Agent(problem);
+
+				var start_time = Date.now();
+
 				agent.search();
+
+				var end_time = Date.now();
+				show_total_time(end_time - start_time);
+
 				agent_loop = setInterval(agent_play, 17);
 			});
 
