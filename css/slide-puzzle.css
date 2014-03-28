@@ -27,3 +27,9 @@
 .canvas {
     float:right;
 }
+
+.total-moves {
+    float:left;
+    position:absolute;
+    top:90px;
+}

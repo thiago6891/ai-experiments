@@ -15,7 +15,26 @@ require(
 			var agent;
 			var agent_loop;
 			
+			var moves_counter = 0;
+			var TOTAL_MOVES_TEXT = "Total Moves: ";
+
+			var update_moves_div = function () {
+				$("#totalMoves").text(TOTAL_MOVES_TEXT + String(moves_counter));
+			};
+
+			var increment_moves_counter = function () {
+				moves_counter++;
+				update_moves_div();
+			};
+
+			var reset_moves_counter = function () {
+				moves_counter = 0;
+				update_moves_div();
+			};
+
 			var generate = function (side) {
+				reset_moves_counter();
+
 			    game.objs = [];
 			    grid = new Grid(side, game.canvas.width);
 			    game.objs.push(grid);
@@ -31,6 +50,7 @@ require(
 					var action = agent.next_action();
 					if (action != null) {
 						grid.click_sqr(action.x, action.y);
+						increment_moves_counter();
 					} else {
 						clearInterval(agent_loop);
 						enable_btns();
@@ -61,6 +81,7 @@ require(
 			$("#canvas").click(function (e) {
 				if (grid != undefined) {
 					grid.handle_click(e.offsetX, e.offsetY);
+					increment_moves_counter();
 					if (grid.solved()) {
 						$("#solveBtn").attr("disabled", true);
 					}
@@ -84,6 +105,8 @@ require(
 				agent.search();
 				agent_loop = setInterval(agent_play, 17);
 			});
+
+			update_moves_div();
 		});
 	}
 );
