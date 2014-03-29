@@ -75,7 +75,7 @@
 
 	// the estimated cost is the sum of the manhattan distances of
 	// each number's current position to its final position.
-    Problem.prototype.estimated_cost_to_goal = function () {
+    Problem.prototype.estimated_cost_to_goal = function (state) {
 		var est_cost = 0;
 		for (var x = 0; x < state.sqrs.length; x++) {
 			for (var y = 0; y < state.sqrs[x].length; y++) {
