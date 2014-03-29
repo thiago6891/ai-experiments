@@ -41,12 +41,17 @@
         }
 
         if (action.x > 0 && state.sqrs[action.x - 1][action.y] === "") {
-            resulting_state.sqrs[action.x - 1][action.y] = state.sqrs[action.x][action.y];
+			// move left action
+			resulting_state.sqrs[action.x - 1][action.y] = state.sqrs[action.x][action.y];
         } else if (action.x < state.sqrs.length - 1 && state.sqrs[action.x + 1][action.y] === "") {
+			// move right action
             resulting_state.sqrs[action.x + 1][action.y] = state.sqrs[action.x][action.y];
         } else if (action.y > 0 && state.sqrs[action.x][action.y - 1] === "") {
+			// move up action
             resulting_state.sqrs[action.x][action.y - 1] = state.sqrs[action.x][action.y];
-        } else if (action.y < state.sqrs[action.x].length - 1 && state.sqrs[action.x][action.y + 1] === "") {
+        } else if (action.y < state.sqrs[action.x].length - 1 &&
+				state.sqrs[action.x][action.y + 1] === "") {
+			// move down action
             resulting_state.sqrs[action.x][action.y + 1] = state.sqrs[action.x][action.y];
         }
         resulting_state.sqrs[action.x][action.y] = "";
