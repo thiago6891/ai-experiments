@@ -20,10 +20,10 @@
         var explored = [];
 
         while (true) {
-            if (frontier.length == 0) {
+            if (frontier.length === 0) {
                 return this.solution(null);
             }
-        	
+
             var parent = frontier.pop();
             explored.push(parent.state);
             var possible_actions = this.problem.actions(parent.state);
@@ -45,11 +45,11 @@
     };
 
     Agent.prototype.solution = function (node) {
-        if (node == null) {
+        if (node === null) {
             return false;
         }
 
-        while (node.parent != null) {
+        while (node.parent !== null) {
             this.seq.push(node.action);
             node = node.parent;
         }
@@ -85,7 +85,7 @@
     };
 
     Agent.prototype.next_action = function () {
-        if (this.seq.length != 0) {
+        if (this.seq.length !== 0) {
             return this.seq.pop();
         }
         return null;
