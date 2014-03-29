@@ -1,7 +1,7 @@
 ﻿define(["slide-puzzle/action", "slide-puzzle/state"], function (Action, State) {
-    var Problem = function (initial_state) {
-        this.initial_state = initial_state;
-    }
+	var Problem = function (initial_state) {
+		this.initial_state = initial_state;
+	}
 
     Problem.prototype.initial_state = null;
 
@@ -71,6 +71,22 @@
 
     Problem.prototype.step_cost = function () {
         return 1;
+    };
+
+	// the estimated cost is the sum of the manhattan distances of
+	// each number's current position to its final position.
+    Problem.prototype.estimated_cost_to_goal = function () {
+    	var est_cost = 0;
+    	for (var x = 0; x < state.sqrs.length; x++) {
+    		for (var y = 0; y < state.sqrs[x].length; y++) {
+    			var num = state.sqrs[x][y];
+    			if (num != "") {
+    				var final_x_pos = (num - 1) % state.sqrs.length;
+    				var final_y_pos = Math.floor((num - 1) / state.sqrs.length);
+    				est_cost += Math.abs(final_x_pos - x) + Math.abs(final_y_pos - y);
+    			}
+    		}
+    	}
     };
 
     return Problem;
