@@ -1,4 +1,4 @@
-﻿define(["slide-puzzle/node"], function (Node) {
+﻿define(["slide-puzzle/node", "utils/priority-queue"], function (Node, PriorityQueue) {
     var Agent = function (problem) {
         this.problem = problem;
     };
@@ -13,15 +13,18 @@
             return this.solution(node);
         }
 
-        var frontier = [];
-        frontier.push(node);
+        var frontier = new PriorityQueue();
+		// the priority for this first node doesn't really matter
+		// since it's the only on the queue when it's popped.
+        frontier.push(node, 0);
         var explored = [];
 
         while (true) {
             if (frontier.length == 0) {
                 return this.solution(null);
             }
-            var parent= this.get_best_estimated_cost(frontier);
+        	
+            var parent = frontier.pop();
             explored.push(parent.state);
             var possible_actions = this.problem.actions(parent.state);
             for (var i = 0; i < possible_actions.length; i++) {
@@ -30,7 +33,12 @@
                     if (this.problem.goal_test(child.state)) {
                         return this.solution(child);
                     }
-                    frontier.push(child);
+
+                    var estimated_cost = this.problem.estimated_cost_to_goal(child.state);
+					// the priority for the queue is the negative value of the estimated cost,
+					// therefore the next node to be popped will be the one that has the lower
+					// estimated cost to reach the goal.
+                    frontier.push(child, -estimated_cost);
                 }
             }
         }
@@ -69,7 +77,7 @@
 
     Agent.prototype.in_frontier = function (frontier, state) {
         for (var i = 0; i < frontier.length; i++) {
-            if (frontier[i].state.equals(state)) {
+            if (frontier[i].element.state.equals(state)) {
                 return true;
             }
         }
@@ -81,29 +89,6 @@
             return this.seq.pop();
         }
         return null;
-    };
-
-    Agent.prototype.get_best_estimated_cost = function (frontier) {
-        var best_estimated_cost = Infinity;
-        var best_idx = -1;
-        for (var i = 0; i < frontier.length; i++) {
-            var estimated_cost_to_goal = 0;
-            for (var x = 0; x < frontier[i].state.sqrs.length; x++) {
-                for (var y = 0; y < frontier[i].state.sqrs[x].length; y++) {
-                    var num = frontier[i].state.sqrs[x][y];
-                    if (num != "") {
-                        var x_pos = (num - 1) % frontier[i].state.sqrs.length;
-                        var y_pos = Math.floor((num - 1) / frontier[i].state.sqrs.length);
-                        estimated_cost_to_goal += Math.abs(x_pos - x) + Math.abs(y_pos - y);
-                    }
-                }
-            }
-            if (estimated_cost_to_goal < best_estimated_cost) {
-                best_estimated_cost = estimated_cost_to_goal;
-                best_idx = i;
-            }
-        }
-        return frontier.splice(best_idx, 1)[0];
     };
 
     return Agent;

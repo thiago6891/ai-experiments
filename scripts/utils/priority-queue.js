@@ -18,7 +18,7 @@ define(function () {
 	PriorityQueue.prototype.find_index = function (start, end, p) {
 		// in the base case (one element) we just have to find out if the
 		// new element should be inserted before or after the only element
-		if (start == end) {
+		if (start >= end) {
 			if (p <= this[start].priority) return start;
 			else return start + 1;
 		}

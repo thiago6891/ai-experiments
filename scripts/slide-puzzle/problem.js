@@ -92,6 +92,7 @@
 				}
 			}
 		}
+		return est_cost;
     };
 
     return Problem;
