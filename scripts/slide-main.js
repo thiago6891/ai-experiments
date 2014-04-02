@@ -99,7 +99,13 @@ require(
 			
 			$("#canvas").click(function (e) {
 				if (grid !== undefined) {
-					grid.handle_click(e.offsetX, e.offsetY);
+					var x = e.offsetX === undefined ?
+						e.pageX - $("#canvas").offset().left :
+						e.offsetX;
+					var y = e.offsetY === undefined ?
+						e.pageY - $("#canvas").offset().top :
+						e.offsetY;
+					grid.handle_click(x, y);
 					increment_moves_counter();
 					if (grid.solved()) {
 						$("#solveBtn").attr("disabled", true);
