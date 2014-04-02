@@ -49,7 +49,9 @@ require(
         // this function determines which state the user clicked, highlights
         // that state and enable selection of the next state.
         var onGridClick = function (e) {
-            var state = grid.getStateForCellAt(e.layerX, e.layerY);
+        	var x = e.offsetX === undefined ? e.layerX : e.offsetX;
+        	var y = e.offsetY === undefined ? e.layerY : e.offsetY;
+            var state = grid.getStateForCellAt(x, y);
             grid.highlightState(state.x, state.y);
             if (init == null) {
                 init = state;
