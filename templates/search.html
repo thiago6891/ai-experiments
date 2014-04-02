@@ -13,17 +13,17 @@
     The grid's size should be a number between 2 and 500.
 </p>
 <div class="search">
-    <div class="input">
-        <label class="label">Size</label>
+    <div>
+        <label>Size</label>
         <input class="inputBox" type="number" id="size" min="2" max="500" value="50">
     </div>
     <input type="button" id="generateBtn" value="Generate Grid">
-    <div id="nextAction"></div>
-    <div class="searchBtns">
+    <div>
         <input type="button" id="dfsBtn" value="DFS" disabled>
         <input type="button" id="bfsBtn" value="BFS" disabled>
         <input type="button" id="asBtn" value="A*" disabled>
     </div>
+    <div id="nextAction"></div>
     <canvas class="grid" id="grid" width="500" height="500">Your browser doesn't support canvas.</canvas>
 </div>
 {% endblock %}

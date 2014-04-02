@@ -1,31 +1,17 @@
 ﻿.search {
-    width:660px;
-    height:500px;
-    margin-left:auto;
-    margin-right:auto;
-    position:relative;
-}
-
-.input {
-    width:150px;
-    height:10px;
-}
-
-.label {
-    float:left;
+    width: 660px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
 }
 
 .inputBox {
-    float:right;
+    width: 50px;
 }
 
 .grid {
-    position:absolute;
-    top:0px;
-    right:0px;
-}
-
-.searchBtns {
-    position:absolute;
-    bottom:400px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }

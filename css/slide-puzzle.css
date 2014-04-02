@@ -1,41 +1,13 @@
 ﻿.puzzle-area {
-    width:660px;
-    height:500px;
-    margin-left:auto;
-    margin-right:auto;
-    position:relative;
-}
-
-.first-btn {
-    float:left;
-    position:absolute;
-    top:0px;
-}
-
-.second-btn {
-    float:left;
-    position:absolute;
-    top:30px;
-}
-
-.third-btn {
-    float:left;
-    position:absolute;
-    top:60px;
+    width: 660px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
 }
 
 .canvas {
-    float:right;
-}
-
-.total-moves {
-    float:left;
-    position:absolute;
-    top:120px;
-}
-
-.total-time {
-    float:left;
-    position:absolute;
-    top:90px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
