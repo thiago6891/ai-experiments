@@ -14,7 +14,7 @@
 			ok(
 				test_pq[0].element == 21		&& test_pq[0].priority == -10 &&
 				test_pq[1].element == "21.5"	&& test_pq[1].priority == -5 &&
-				test_pq[2].element == 20		&& test_pq[2].priority == 0 &&
+				test_pq[2].element == 20		&& test_pq[2].priority === 0 &&
 				test_pq[3].element == 21.5		&& test_pq[3].priority == 5 &&
 				test_pq[4].element == 20		&& test_pq[4].priority == 10);
 		});

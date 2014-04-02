@@ -12,7 +12,7 @@
 
 		test("PriorityQueue.find_index() Test", function () {
 			ok(
-				test_pq.find_index(0, 4, -11) == 0 &&
+				test_pq.find_index(0, 4, -11) === 0 &&
 				test_pq.find_index(0, 4, -7) == 1 &&
 				test_pq.find_index(0, 4, -3) == 2 &&
 				test_pq.find_index(0, 4, 2) == 3 &&

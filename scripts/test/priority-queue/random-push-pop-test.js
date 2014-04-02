@@ -3,7 +3,7 @@
 
 	unit_test.prepare = function () {
 		var total_nums = 200;
-		var assert_array = []
+		var assert_array = [];
 		var test_pq = new PriorityQueue();
 
 		for (var i = 0; i < total_nums; i++) {
@@ -14,7 +14,7 @@
 		assert_array.sort(function (a, b) { return a - b; });
 
 		var ordered = true;
-		for (var i = 0; i < total_nums; i++) {
+		for (i = 0; i < total_nums; i++) {
 			if (test_pq.pop() != assert_array.pop()) {
 				ordered = false;
 				break;
