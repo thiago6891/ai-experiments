@@ -4,13 +4,31 @@
 <script data-main="../scripts/search-main" src="../scripts/require.js"></script>
 {% endblock %}
 {% block content %}
+<h1>
+    Problem Searching
+</h1>
 <p>
     Below you'll find a small application where it's possible to visualize how Depth-First
     Search, Breadth-First Search and A* algorithms work. You'll be able to generate a grid,
-    select the initial and goal states and then run the desired algorithm.
+    select the initial and goal states and then run the desired algorithm.<br />
+    The grid's size should be a number between 2 and 500.
+</p>
+<h2>
+    A word about heuristics
+</h2>
+<p>
+    One interesting aspect to notice in the A* search algorithm is how the choice of a good
+    heuristic can impact the search time.<br />
+    In the grid below for instance, the estimated cost from a state to the goal is calculated by 
+    flooring the length of a straight line from these two states, which is clearly a lower-bound on 
+    the true cost, but we should notice that if the initial and goal states are located in the same 
+    row or column, our heuristic function calculates the exact cost to reach the goal and, 
+    therefore, the search time is faster than searching for a solution from any state to a goal 
+    that's placed diagonally from it.<br />
+    This can be easily verified by experimenting with the grid below.
 </p>
 <p>
-    The grid's size should be a number between 2 and 500.
+    
 </p>
 <div class="search">
     <div>
